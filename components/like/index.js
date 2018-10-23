@@ -29,7 +29,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onLike(e){
+    onLike:function(e){
       // 自己实现
       // var that = this;
       // console.log(that.data);
