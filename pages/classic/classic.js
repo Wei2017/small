@@ -1,4 +1,7 @@
-// pages/classic/classic.js
+//引入封装的类  必须是相对路径
+import {HTTP} from '../../utils/http.js';
+//HTTP是个类 如果使用HTTP下的实例方法 必须先实例化类
+const http = new HTTP();
 Page({
 
   /**
@@ -12,7 +15,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    http.request({
+      url:'classic/latest',
+      success: res =>{
+        console.log(res);
+      }
+    })
   },
 
   /**
