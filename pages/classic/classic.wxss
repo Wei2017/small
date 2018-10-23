@@ -1,1 +1,5 @@
 /* pages/classic/classic.wxss */
+.c{
+  display: flex;
+  flex-direction:column;  
+}
