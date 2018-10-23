@@ -31,7 +31,7 @@ class HTTP{
         let code = res.statusCode.toString();
         //如果状态码为 2 开头的则请求成功
         if(code.startsWith('2')){
-          console.log(res);          
+          params.success(res.data);
           //请求成功处理代码
         }else{
           //请求失败处理代码
