@@ -1,4 +1,4 @@
-<view class='container'>
-  <image src='images/xin.png'></image>
-  <text>9</text>
+<view bindtap='onLike' class='container'>
+  <image src='{{like?checkSrc:noCheckSrc}}'></image>
+  <text>{{count}}</text>
 </view>

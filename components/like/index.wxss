@@ -1,5 +1,5 @@
 .container{
-  display: flex;
+  display: inline-flex;/*设置inline-flex  使元素宽度自适应*/
   flex-direction: row;
   padding: 10rpx;
 }
