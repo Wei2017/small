@@ -2,6 +2,7 @@
 Component({
   /**
    * 组件的属性列表
+   * 方便在使用组件的wxml使用prooerties设置的属性
    */
   properties: {
     like:{
@@ -20,7 +21,7 @@ Component({
     // like:false,
     // count:0,
 
-    // 封装太内部的数据
+    // 封装太内部的数据  私有的不能被外部访问到
     checkSrc:'images/xin.png',
     noCheckSrc:'images/like.png'
   },
@@ -30,21 +31,7 @@ Component({
    */
   methods: {
     onLike:function(e){
-      // 自己实现
-      // var that = this;
-      // console.log(that.data);
-      // if (that.data.like && that.data.count>=0){
-      //     that.setData({
-      //       count: that.data.count -= 1,
-      //       like:false
-      //     })
-      // }else{
-      //   that.setData({
-      //     count:that.data.count += 1,
-      //     like:true
-      //   })
-      // }
-      // 根据课程思路实现
+      //获取调用组件的wxml中 传过来的值
       let like = this.properties.like;
       let count = this.properties.count;
 
@@ -54,6 +41,13 @@ Component({
         count:count,
         like:!like
       })
+
+      //自定义事件
+      let behavior = this.properties.like?'like':'cancel';
+      // 激活组件  like 自定义事件名称  bindlike="方法名"
+      this.triggerEvent('like',{
+        behavior: behavior
+      },{})
     }
   }
 })

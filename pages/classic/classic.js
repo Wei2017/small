@@ -1,26 +1,29 @@
-//引入封装的类  必须是相对路径
-import {HTTP} from '../../utils/http.js';
+//引入封装的类 {必须是classic.js中定义的类名}   引用路径必须是相对路径
+import {ClassicModel} from '../../models/classic.js';
 //HTTP是个类 如果使用HTTP下的实例方法 必须先实例化类
-const http = new HTTP();
+const classic = new ClassicModel();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    classic:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    http.request({
-      url:'classic/latest',
-      success: res =>{
-        console.log(res);
-      }
+    classic.getLatest((res)=>{
+      console.log(res);
+      this.setData({
+        classic:res
+      })
     })
+  },
+  onLike:function(event){
+    console.log(event);
   },
 
   /**

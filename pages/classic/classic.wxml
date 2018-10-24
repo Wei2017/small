@@ -1,1 +1,3 @@
-<v-like />
+<!-- 组件属性赋值 index.js中的properties 可以被外部访问到 调用组件时直接定义properties中的属性即可 -->
+<v-like bindlike="onLike" like="{{classic.like_status}}" count="{{classic.fav_nums}}" />
+<v-movie img="{{classic.image}}" content="{{classic.content}}" />

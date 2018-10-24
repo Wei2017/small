@@ -1,10 +1,17 @@
 import {config} from '../config.js'
 
+//记录错误码对应的错误提示
+const tips = {
+  1:'网络链接失败，请稍后重试',
+  1005:'appkey无效，请前往www.7yue.pro申请',
+  3000:'期刊不存在'
+}
+
 // es6 封装类
 class HTTP{
   /*为类添加方法 
-  * 方法名(参数){代码}
-  * 可以是作为一个函数 在类下面作为一个方法
+  * 方法名(参数){代码块}
+  * 可以试作为一个函数 在类下面作为一个方法
   */
   request(params){
     //如果没有传请求的方法 则默认为GET
@@ -34,12 +41,29 @@ class HTTP{
           params.success(res.data);
           //请求成功处理代码
         }else{
-          //请求失败处理代码
+          /*请求失败处理代码
+            获取错误码
+          */
+          let error_code = res.data.error_code
+          this._show_error(error_code)
         }
       },
       fail:err=>{
-        console.log(err)
+        this._show_error(1);
       }
+    })
+  }
+
+  _show_error(error_code){
+    console.log(error_code,tips);
+    //
+    if(!error_code){
+      error_code = 1
+    }
+    wx.showToast({
+      title: tips[error_code],
+      icon:'none',
+      duration:2000
     })
   }
 }
