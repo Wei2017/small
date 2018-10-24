@@ -1,7 +1,9 @@
 //引入封装的类 {必须是classic.js中定义的类名}   引用路径必须是相对路径
 import {ClassicModel} from '../../models/classic.js';
+import {LikeModel} from '../../models/like.js';
 //HTTP是个类 如果使用HTTP下的实例方法 必须先实例化类
-const classic = new ClassicModel();
+const classicModel = new ClassicModel();
+const likeModel = new LikeModel();
 Page({
 
   /**
@@ -15,7 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    classic.getLatest((res)=>{
+    classicModel.getLatest((res)=>{
       console.log(res);
       this.setData({
         classic:res
@@ -24,6 +26,8 @@ Page({
   },
   onLike:function(event){
     console.log(event);
+    let behavior = event.detail.behavior;
+    likeModel.like(behavior,this.data.classic.id,this.data.classic.type)
   },
 
   /**

@@ -38,7 +38,8 @@ class HTTP{
         let code = res.statusCode.toString();
         //如果状态码为 2 开头的则请求成功
         if(code.startsWith('2')){
-          params.success(res.data);
+          //先判断params.success是否为空 如果为空则不走后面代码 不返回res.data
+          params.success && params.success(res.data);
           //请求成功处理代码
         }else{
           /*请求失败处理代码
