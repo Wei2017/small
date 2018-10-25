@@ -35,10 +35,25 @@ Page({
 
   // 切换期刊
   onNext:function(e){
-    console.log(e)
+    let index = this.data.classic.index;
+    classicModel.getNext(index,res=>{
+      this.setData({
+        classic: res,
+        latest: classicModel.isLatest(res.index),
+        first: classicModel.isFirst(res.index)
+      })
+    })
   },
   onPrevious:function(e){
-    console.log(e)
+    let index = this.data.classic.index;
+    classicModel.getPrevious(index,res=>{
+      console.log(res);
+      this.setData({
+        classic:res,
+        latest:classicModel.isLatest(res.index),
+        first:classicModel.isFirst(res.index)
+      })
+    })
   },
 
   /**
