@@ -10,7 +10,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    classic:null
+    classic:null,
+    latest:true,
+    first:false
   },
 
   /**
@@ -24,10 +26,19 @@ Page({
       })
     })
   },
+  // 点赞&取消点赞
   onLike:function(event){
     console.log(event);
     let behavior = event.detail.behavior;
     likeModel.like(behavior,this.data.classic.id,this.data.classic.type)
+  },
+
+  // 切换期刊
+  onNext:function(e){
+    console.log(e)
+  },
+  onPrevious:function(e){
+    console.log(e)
   },
 
   /**

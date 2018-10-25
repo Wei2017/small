@@ -1,6 +1,9 @@
-<view class='header'>
-  <v-epsoide class="epsoide" index="{{classic.index}}" />
-  <!-- 组件属性赋值 index.js中的properties 可以被外部访问到 调用组件时直接定义properties中的属性即可 -->
-  <v-like class="like" bindlike="onLike" like="{{classic.like_status}}" count="{{classic.fav_nums}}" />
+<view class='container'>
+  <view class='header'>
+    <v-epsoide class="epsoide" index="{{classic.index}}" />
+    <!-- 组件属性赋值 index.js中的properties 可以被外部访问到 调用组件时直接定义properties中的属性即可 -->
+    <v-like class="like" bindlike="onLike" like="{{classic.like_status}}" count="{{classic.fav_nums}}" />
+  </view>
+  <v-movie img="{{classic.image}}" content="{{classic.content}}" />
+  <v-navi bindleft="onNext" bindright="onPrevious" class='navi' latest="{{latest}}" first="{{first}}" title="{{classic.title}}" />
 </view>
-<v-movie img="{{classic.image}}" content="{{classic.content}}" />
