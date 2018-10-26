@@ -12,7 +12,9 @@ Page({
   data: {
     classic:null,
     latest:true,
-    first:false
+    first:false,
+    likeCount:0,
+    likeState:false
   },
 
   /**
@@ -22,7 +24,9 @@ Page({
     classicModel.getLatest((res)=>{
       console.log(res);
       this.setData({
-        classic:res
+        classic:res,
+        likeCount: res.fav_nums,
+        likeState: res.like_status
       })
     })
   },
@@ -42,12 +46,23 @@ Page({
   },
   _updateClassic: function (nextOrPrevious){
     let index = this.data.classic.index;
-    classicModel.getClassic(index, nextOrPrevious,res=>{
-      console.log(res);
+    classicModel.getClassic(index, nextOrPrevious,res=>{ 
+      //每次切换 请求接口 或 读取缓存中期刊数据 更新当前期刊点赞信息
+      this._getLikeState(res.id,res.type); 
       this.setData({
         classic:res,
         latest:classicModel.isLatest(res.index),
         first:classicModel.isFirst(res.index)
+      })
+    })
+  },
+
+  //私有方法 获取当前期刊的点赞状态
+  _getLikeState:function(artId,category){
+    likeModel.getClassicLikeState(artId,category,res=>{
+      this.setData({
+        likeCount: res.fav_nums,
+        likeState: res.like_status
       })
     })
   },
