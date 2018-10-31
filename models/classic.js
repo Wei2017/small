@@ -3,7 +3,7 @@ import {HTTP} from '../utils/http.js';
   使用HTTP类时 无需再实例化 直接this.方法名即可
 */
 class ClassicModel extends HTTP{
-  //加载期刊  
+  //加载最新一期的期刊  
   getLatest(sCallback){
     this.request({
       url: 'classic/latest',
@@ -30,7 +30,6 @@ class ClassicModel extends HTTP{
       this.request({
         url: 'classic/' + index + '/' + nextOrPrevious,
         success: res => {
-          console.log(index,nextOrPrevious);
           sCallback(res);
           wx.setStorageSync(this._getKey(res.index), res)
         }
@@ -41,11 +40,12 @@ class ClassicModel extends HTTP{
     
   };
 
-
+  //是否为第一期的期刊
   isFirst(index){
     return index == 1?true:false
   };
 
+  //是否为最新一期的期刊
   isLatest(index){
     let latestIndex = this._getLatestIndex();
     return latestIndex == index?true:false
