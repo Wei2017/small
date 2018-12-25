@@ -1,4 +1,4 @@
-import {config} from '../config.js'
+import {config} from '../config.js' 
 
 //记录错误码对应的错误提示
 const tips = {
