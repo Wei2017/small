@@ -8,7 +8,8 @@ Component({
    */
   behaviors:[classicBeh],
   properties: {
-    src:String
+    src:String,
+    title:String
   },
 
   /**
@@ -21,7 +22,8 @@ Component({
   },
   //在组件实例进入页面节点树时执行 生命周期函数
   attached:function(e){
-    this._recoverStatus()
+    this._recoverStatus();
+    this._monitorSwitch();
   },
   //组件实例被从页面节点树移除时执行  生命周期函数
   detached:function(e){
@@ -38,6 +40,7 @@ Component({
         this.setData({
           playing: true
         })
+        mMgr.title = this.data.title;
         mMgr.src = this.data.src;
       }else{ 
         //暂停播放
@@ -47,7 +50,7 @@ Component({
         mMgr.pause();
       }
     },
-
+    //恢复状态 私有方法
     _recoverStatus:function(){
       //当前背景音乐未暂停状态 显示播放按钮
       if(mMgr.paused){
@@ -62,6 +65,22 @@ Component({
           playing:true
         })
       }
+    },
+
+    //监听微信背景音乐总控开关
+    _monitorSwitch:function(){
+      mMgr.onPlay(()=>{   //接收一个callback
+        this._recoverStatus()
+      });
+      mMgr.onPause(()=>{
+        this._recoverStatus()
+      });
+      mMgr.onStop(()=>{
+        this._recoverStatus()
+      });
+      mMgr.onEnded(()=>{
+        this._recoverStatus()
+      })
     }
   }
 })
