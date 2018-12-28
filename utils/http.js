@@ -55,16 +55,17 @@ class HTTP{
     })
   }
 
-  _show_error(error_code){
-    console.log(error_code,tips);
+  _show_error(error_code) {
+    console.log(error_code, tips);
     //
-    if(!error_code){
+    if (!error_code) {
       error_code = 1
     }
+    const tip = tips[error_code]
     wx.showToast({
-      title: tips[error_code],
-      icon:'none',
-      duration:2000
+      title: tip ? tip : tips[1],
+      icon: 'none',
+      duration: 2000
     })
   }
 }
