@@ -1,4 +1,6 @@
-import { BookModel} from '../../models/book.js';
+import {
+  BookModel
+} from '../../models/book.js';
 let bookmodel = new BookModel;
 Page({
 
@@ -6,17 +8,35 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    books:[],
+    searching:false //控制搜索组件显示隐藏
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    const hotList = bookmodel.getHotList();
-    hotList.then(res=>{
+  onLoad: function(options) {
+    let that = this;
+    /*Promise正确用法*/
+    bookmodel.getHotList().then(res => {
       console.log(res);
+      that.setData({
+        books:res
+      })
     })
+
+
+    /*Promise的错误用法*/
+    // const hotList = bookmodel.getHotList();
+    // hotList.then(res=>{
+    //   console.log(res);
+    //   bookmodel.getMyBookCount().then(res=>{
+    //     console.log(res);
+    //   })
+    // })
+
+
+
     //第一步 创建Promise
     //第二步 异步代码 写在Promise的函数中
     // const promise = new Promise((resolve,reject)=>{
@@ -37,53 +57,15 @@ Page({
     //   console.log(res)
     // })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onSearching(event){
+    this.setData({
+      searching:true
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  onCancel(event){
+    this.setData({
+      searching: false
+    })
   }
+
 })
