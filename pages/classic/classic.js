@@ -113,6 +113,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    let that = this;
+    return {
+      title: that.data.classic.title,
+      imageUrl: that.data.classic.image
+    }
   }
 })

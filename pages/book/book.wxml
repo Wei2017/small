@@ -9,10 +9,10 @@
         <image class="head-img" src="/images/book/quality.png" />
         <view class="books-container">
             <block wx:key="id" wx:for="{{books}}">
-                <v-book book="{{item}}" />
+                <v-book showLike="{{true}}" book="{{item}}" />
             </block>
         </view>
     </view>
 </view>
 
-<v-search bindcancel="onCancel" wx:if="{{searching}}" />
+<v-search more="{{more}}" hotWords="{{hotWords}}" bindcancel="onCancel" wx:if="{{searching}}" />

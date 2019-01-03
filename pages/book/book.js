@@ -2,6 +2,9 @@ import {
   BookModel
 } from '../../models/book.js';
 let bookmodel = new BookModel;
+import {KeywordModel } from '../../models/keyword.js';
+const keywordModel = new KeywordModel();
+import {random} from '../../utils/common.js';
 Page({
 
   /**
@@ -9,7 +12,9 @@ Page({
    */
   data: {
     books:[],
-    searching:false //控制搜索组件显示隐藏
+    searching:false, //控制搜索组件显示隐藏
+    hotWords:[],
+    more:'' //搜索组件页面触底 组件获取page页面传入的参数
   },
 
   /**
@@ -58,13 +63,25 @@ Page({
     // })
   },
   onSearching(event){
+    //显示搜索组件
     this.setData({
-      searching:true
+      searching: true
+    })
+    //通过接口请求热门搜索内容将热门搜索内容传递给search组件
+    keywordModel.getHot().then(res=>{
+      this.setData({
+        hotWords:res.hot
+      })
     })
   },
   onCancel(event){
     this.setData({
       searching: false
+    })
+  },
+  onReachBottom(event){
+    this.setData({
+      more: random(16)
     })
   }
 

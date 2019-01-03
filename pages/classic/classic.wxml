@@ -1,12 +1,29 @@
 <view class='container'>
   <view class='header'>
     <v-episode class="episode" index="{{classic.index}}" />
-    <!-- 组件属性赋值 index.js中的properties 可以被外部访问到 调用组件时直接定义properties中的属性即可 -->
-    <v-like class="like" bindlike="onLike" like="{{likeState}}" count="{{likeCount}}" />
+    <view class='like-container'>
+      <!-- 组件属性赋值 index.js中的properties 可以被外部访问到 调用组件时直接定义properties中的属性即可 -->
+      <v-like class="like" bindlike="onLike" like="{{likeState}}" count="{{likeCount}}" />
+      <v-button class='share-btn' open-type='share'>
+        <image class='share' slot="img" src='/images/icon/share.png'></image>
+      </v-button>
+    </view>
   </view>
-  <v-movie hidden="{{classic.type != 100}}" img="{{classic.image}}" content="{{classic.content}}" />
+  <v-movie hidden="{{classic.type != 100}}" img="{{util.getHttp(classic.image)}}" content="{{classic.content}}" />
   <!-- <v-music hidden="{{classic.type != 200}}" img="{{classic.image}}" content="{{classic.content}}" src="{{classic.url}}"/> -->
   <v-music wx:if="{{classic.type == 200}}" img="{{classic.image}}" content="{{classic.content}}" src="{{classic.url}}" title="{{classic.title}}"/>
   <v-essay hidden="{{classic.type != 300}}" img="{{classic.image}}" content="{{classic.content}}" />
   <v-navi bindleft="onNext" bindright="onPrevious" class='navi' latest="{{latest}}" first="{{first}}" title="{{classic.title}}" />
 </view>
+
+<wxs module="util">
+  var getHttp = function(url){
+    var isHttp = url.split(':');
+    if(isHttp[0] == 'https'){
+      return 'http:'+isHttp[1]
+    }else{
+      return url
+    }
+  }
+  module.exports = {getHttp:getHttp}
+</wxs>
