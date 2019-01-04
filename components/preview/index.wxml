@@ -3,6 +3,18 @@
     <v-tag text="{{typeText}}" tag-class="tag" />
     <v-like class="like" read-only="{{true}}" like="{{true}}" count="{{classic.fav_nums}}" />
   </view>
-  <image class="{{classic.type==200?'music-img':'other-img'}}" src="{{classic.image}}"></image>
+  <image class="{{classic.type==200?'music-img':'other-img'}}" src="{{util.getHttp(classic.image)}}"></image>
   <view class="text">{{classic.content}}</view>
 </view>
+
+<wxs module="util">
+  var getHttp = function(url){
+    var isHttp = url.split(':');
+    if(isHttp[0] == 'https'){
+      return 'http:'+isHttp[1]
+    }else{
+      return url
+    }
+  }
+  module.exports = {getHttp:getHttp}
+</wxs>

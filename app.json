@@ -1,10 +1,13 @@
 {
   "pages":[
+    "pages/classic/classic",
     "pages/my/my",
     "pages/book/book",
     "pages/book-detail/book-detail",
-    "pages/classic/classic",
-    "pages/about/about"
+    "pages/about/about",
+    "pages/classic-detail/classic-detail",
+    "pages/my-weibo/my-weibo",
+    "pages/my-github/my-github"
   ],
   "window":{
     "backgroundTextStyle":"light",

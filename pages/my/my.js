@@ -1,4 +1,7 @@
-
+import {BookModel} from '../../models/book.js';
+const bookModel = new BookModel();
+import {ClassicModel} from '../../models/classic.js';
+const classicModel = new ClassicModel();
 Page({
 
   /**
@@ -11,7 +14,23 @@ Page({
     classics: null
   },
   onLoad(options){
-    this.userAuthorized()
+    
+  },
+  //我喜欢的书的数量
+  getMyBookCount(){
+    bookModel.getMyBookCount().then(res=>{
+      this.setData({
+        bookCount:res.count
+      })
+    })
+  },
+  //我喜欢的期刊数据
+  getMyFavor(){
+    classicModel.getMyFavor(res=>{
+      this.setData({
+        classics: res
+      })
+    })
   },
   userAuthorized(){
     wx.getSetting({
@@ -45,12 +64,12 @@ Page({
       url: '/pages/about/about',
     })
   },
+
   onShow(options) {
-
+    this.userAuthorized();
+    this.getMyBookCount();
+    this.getMyFavor();
   }
-
-
-
 })
 
 

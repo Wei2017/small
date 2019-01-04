@@ -51,6 +51,15 @@ class ClassicModel extends HTTP{
     return latestIndex == index?true:false
   };
 
+  //获取我喜欢的期刊
+  getMyFavor(success){
+    const params = {
+      url:'classic/favor',
+      success:success
+    }
+    this.request(params)
+  };
+
   //存储最新一期的期刊 期号
   _setLatestIndex(index){
     //同步存储缓存

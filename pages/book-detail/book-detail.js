@@ -114,6 +114,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    let that = this;
+    return {
+      title: `${that.data.book.author}:《${that.data.book.title}》`,
+      imageUrl: that.data.book.image
+    }
   }
 })

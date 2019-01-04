@@ -10,7 +10,8 @@ Component({
     },
     count:{
       type:Number  //Number类型默认值是0 如果为0则无需设置value值
-    }
+    },
+    readOnly:Boolean
   },
 
   /**
@@ -31,6 +32,9 @@ Component({
    */
   methods: {
     onLike:function(e){
+      if (this.properties.readOnly){
+        return
+      }
       //获取调用组件的wxml中 传过来的值
       let like = this.properties.like;
       let count = this.properties.count;

@@ -4,7 +4,6 @@
     <v-button wx:if="{{!authorized}}" open-type="getUserInfo" class="avatar-position" bind:getuserinfo="onGetUserInfo">
         <image slot="img" class="avatar" src="/images/my/my.png" />
     </v-button>
-    <!-- 登录 难点 服务器 微信支付 -->
     <view wx:if="{{authorized}}" class="avatar-container avatar-position">
         <image src="{{userInfo.avatarUrl}}" class="avatar" />
         <text>{{userInfo.nickName}}</text>
@@ -12,7 +11,7 @@
     <view class="about-container">
         <view bind:tap="onJumpToAbout" class="about-us">
             <image src="/images/my/about.png" />
-            <text class="description">关于我们</text>
+            <text class="description">关于我</text>
         </view>
         <view class="about-us">
             <text class="book-num">{{bookCount}}</text>
@@ -30,4 +29,14 @@
     </view>
 
 </view>
-<image bind:tap="onStudy" class="study" src="/images/my/study.png"></image>
+<wxs module="util">
+  var getHttp = function(url){
+    var isHttp = url.split(':');
+    if(isHttp[0] == 'https'){
+      return 'http:'+isHttp[1]
+    }else{
+      return url
+    }
+  }
+  module.exports = {getHttp:getHttp}
+</wxs>

@@ -1,4 +1,40 @@
-<image class="about"  />
- <navigator class="nav" target="miniProgram" app-id="wx8ffc97ad5bcccc89" open-type="navigate">
+<!-- <image class="about"  /> -->
+<!-- <navigator class="nav" target="miniProgram" app-id="wx8ffc97ad5bcccc89" open-type="navigate">
  <image class="vendor" src="/images/my/vendor.png"></image>
- </navigator> 
+ </navigator>  -->
+<view class='auout-container' style="height:{{sysHeight}}">
+  <image src='/images/my/bj1.png'></image>
+  <view class='user-head'>
+    <image src='/images/my/head.jpg'></image>
+    <text class='my-name'>杜晓伟</text>
+    <text>小小前端耕耘者</text>
+  </view>
+  <view class='introduce'>
+    <text class='title'>个人简介</text>
+    <view class='my-introduce'>
+      <text>您好，我叫杜晓伟，坐标北京，2015年开始自学前端，并从测试行业转战到前端领域，目前在学Vue、AnjularJs、PHP。</text>
+      <text>本人在公司主要负责前端开发，与后台人员配合实现页面数据渲染和功能。写过Wap端、PC端、微信服务号。小的来说，电商，企业官网，在线视频、音频，用户评论，百度地图、微信定位员工打卡、等都有涉及。</text>
+      <text>欢迎志同道合的朋友添加本人微信，一起探讨，学习。</text>
+    </view>
+  </view>
+  <view class='footer'>
+    <text>在此非常感谢慕课网七月老师录制的课程和细心的讲解。</text>
+    <text>此项目为个人项目,不承诺保留用户相关数据信息</text>
+  </view>
+  <view class='fixed-right'>
+    <navigator url="/pages/my-weibo/my-weibo" class="weibo img-box">
+     <image class='icon' src='/images/my/weibo.png'></image>
+    </navigator>
+    <view class='weixin img-box' bindtap='showMask'>
+      <image class='icon' src='/images/my/weixin.png'></image>
+    </view>
+    <navigator url="/pages/my-github/my-github" class="github img-box">
+     <image class='icon' src='/images/my/github.png'></image>
+    </navigator>
+  </view>
+  <view class='weixin-qrcode' wx:if="{{popup}}">
+    <image src='/images/my/qr-code.jpg' bindtap='previewImage'></image>
+  </view>
+</view>
+<v-mask wx:if="{{popup}}" bindtap="close"/>
+
